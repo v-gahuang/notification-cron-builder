@@ -1,18 +1,13 @@
 import React, { Component } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { FaInfo } from 'react-icons/fa';
 
 class UpdateNotifications extends Component {
-  constructor() {
-    super();
-    this.state = {
-      notificationCrons: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleUpdate = this.handleUpdate.bind(this);
-    this.handleCancel = this.handleCancel.bind(this);
-  }
 
-  handleUpdate(e) {
+  state = {
+    notificationCrons: ''
+  };
+
+  handleUpdate = (e)=> {
     e.preventDefault();
     let tempNotification = {
       ...this.props.selectedNotification,
@@ -27,7 +22,7 @@ class UpdateNotifications extends Component {
     this.props.toggleForm();
   }
 
-  handleChange(e) {
+  handleChange= (e)=> {
     const target = e.target;
     const value = target.value;
     const name = target.name;
@@ -37,14 +32,22 @@ class UpdateNotifications extends Component {
     });
   }
 
-  handleCancel(e) {
+  handleCancel = (e)=>{
     this.setState({
       notificationCrons: ''
     });
+    this.props.cancelSelect();
     this.props.toggleForm();
-  }
+  };
 
   render() {
+
+    const { selectedNotification } = this.props;
+    let cardTitle = "Please Select Job To Update";
+    if(selectedNotification.jobName) {
+      cardTitle = `Update Job Trigger - ${selectedNotification.jobName}`
+    }
+
     return (
       <div
         className={
@@ -56,7 +59,7 @@ class UpdateNotifications extends Component {
           className="apt-ppdateheading card-header bg-primary text-white"
           onClick={this.props.toggleForm}
         >
-          <FaPlus /> Update Job Trigger - {this.props.selectedNotification.jobName}
+          <FaInfo /> {cardTitle}
         </div>
 
         <div className="card-body">
@@ -69,14 +72,13 @@ class UpdateNotifications extends Component {
                 Old Cron Expressions
               </label>
               <div className="col-md-10">
-                <input
-                  disabled={true}
-                  type="text"
-                  className="form-control"
-                  name="groupName"
-                  placeholder="Group's Name"
-                  value={this.props.selectedNotification.notificationCrons}
-                />
+              <label
+                className="col-form-label text-md-left"
+                
+              >
+                {selectedNotification.notificationCrons}
+              </label>
+                
               </div>
             </div>
 
@@ -91,7 +93,7 @@ class UpdateNotifications extends Component {
                   cols="50"
                   name="notificationCrons"
                   id="notificationCrons"
-                  placeholder="Quartz Cron Expressions"
+                  placeholder="Please input new Quartz Cron Expressions"
                   value={this.state.notificationCrons}
                   onChange={this.handleChange}
                 />

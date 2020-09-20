@@ -7,26 +7,20 @@ import ListNotifications from './ListNotifications';
 import { findIndex, without } from 'lodash';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      myNotifications: [],
-      formDisplay: false,
-      lastIndex: 0,
-      selectedNotification: {},
-    };
-    this.toggleForm = this.toggleForm.bind(this);
-    this.updateNotification = this.updateNotification.bind(this);
-    this.editNotification = this.editNotification.bind(this);
-  }
+  state = {
+    myNotifications: [],
+    formDisplay: false,
+    lastIndex: 0,
+    selectedNotification: {},
+  };
 
-  toggleForm() {
+  toggleForm =()=> {
     this.setState({
       formDisplay: !this.state.formDisplay
     });
   }
 
-  updateNotification(notification) {
+  updateNotification = (notification)=> {
     let tempNotifications = this.state.myNotifications;
     let notificationIndex = findIndex(this.state.myNotifications, {
       jobName: notification.jobName
@@ -37,11 +31,18 @@ class App extends Component {
     });
   }
 
-  editNotification(notification) {
+  editNotification = (notification)=> {
       this.setState({
         selectedNotification: notification,
         formDisplay: true
       });
+  }
+
+  cancelSelect = () => {
+    console.log("cancelSelect");
+    this.setState({
+      selectedNotification: {}
+    });
   }
 
   componentDidMount() {
@@ -72,6 +73,7 @@ class App extends Component {
                   toggleForm={this.toggleForm}
                   selectedNotification={this.state.selectedNotification}
                   updateNotification={this.updateNotification}
+                  cancelSelect={this.cancelSelect}
                 />
                 <ListNotifications
                   notifications={this.state.myNotifications}
