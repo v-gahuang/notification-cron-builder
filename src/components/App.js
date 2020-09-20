@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import '../css/App.css';
 
-import AddNotifications from './AddNotifications';
+import UpdateNotifications from './UpdateNotifications';
 import ListNotifications from './ListNotifications';
 
-import { without } from 'lodash';
+import { findIndex, without } from 'lodash';
 
 class App extends Component {
   constructor() {
@@ -12,11 +12,12 @@ class App extends Component {
     this.state = {
       myNotifications: [],
       formDisplay: false,
-      lastIndex: 0
+      lastIndex: 0,
+      selectedNotification: {},
     };
-    this.deleteNotification = this.deleteNotification.bind(this);
     this.toggleForm = this.toggleForm.bind(this);
-    this.addNotification = this.addNotification.bind(this);
+    this.updateNotification = this.updateNotification.bind(this);
+    this.editNotification = this.editNotification.bind(this);
   }
 
   toggleForm() {
@@ -25,23 +26,22 @@ class App extends Component {
     });
   }
 
-  addNotification(notification) {
+  updateNotification(notification) {
     let tempNotifications = this.state.myNotifications;
-    notification.notificationId = this.state.lastIndex;
-    tempNotifications.unshift(notification);
+    let notificationIndex = findIndex(this.state.myNotifications, {
+      jobName: notification.jobName
+    });
+    tempNotifications[notificationIndex].notificationCrons = notification.notificationCrons;
     this.setState({
       myNotifications: tempNotifications,
-      lastIndex: this.state.lastIndex + 1
     });
   }
 
-  deleteNotification(notification) {
-    let tempNotifications = this.state.myNotifications;
-    tempNotifications = without(tempNotifications, notification);
-
-    this.setState({
-      myNotifications: tempNotifications
-    });
+  editNotification(notification) {
+      this.setState({
+        selectedNotification: notification,
+        formDisplay: true
+      });
   }
 
   componentDidMount() {
@@ -67,14 +67,15 @@ class App extends Component {
           <div className="row">
             <div className="col-md-12 bg-white">
               <div className="container">
-                <AddNotifications
+                <UpdateNotifications
                   formDisplay={this.state.formDisplay}
                   toggleForm={this.toggleForm}
-                  addNotification={this.addNotification}
+                  selectedNotification={this.state.selectedNotification}
+                  updateNotification={this.updateNotification}
                 />
                 <ListNotifications
                   notifications={this.state.myNotifications}
-                  deleteNotification={this.deleteNotification}
+                  editNotification={this.editNotification}
                 />
               </div>
             </div>

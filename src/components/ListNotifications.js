@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FaTimes } from 'react-icons/fa';
+import { FaTimes, FaEdit } from 'react-icons/fa';
 import Moment from 'react-moment';
 
 class ListNotifications extends Component {
@@ -10,9 +10,9 @@ class ListNotifications extends Component {
           <div className="job-item col media py-3" key={item.notificationId}>
             <div className="mr-3">
               <button
-                className="job-delete btn btn-sm btn-danger"
-                onClick={() => this.props.deleteNotification(item)}>
-                <FaTimes />
+                className="job-edit btn btn-sm btn-primary"
+                onClick={() => this.props.editNotification(item)}>
+                <FaEdit />
               </button>
             </div>
 

@@ -1,8 +1,8 @@
-.add-notification .card-body {
+.update-notification .card-body {
   display: none;
 }
 
-.notification-addheading {
+.notification-updateheading {
   cursor: pointer;
   user-select: none;
 }
