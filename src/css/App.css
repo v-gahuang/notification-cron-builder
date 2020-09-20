@@ -1,0 +1,45 @@
+.add-notification .card-body {
+  display: none;
+}
+
+.notification-addheading {
+  cursor: pointer;
+  user-select: none;
+}
+
+.notification-list {
+  font-size: 1.1em;
+}
+
+.notification-list .job-item {
+  border-bottom: 1px dotted gray;
+}
+
+.notification-list .job-item:last-child {
+  border-bottom: none;
+}
+
+.notification-list .job-name {
+  font-weight: 600;
+  color: #337ab7;
+  font-size: 1.3em;
+  line-height: 100%;
+}
+
+.notification-list .label-item {
+  font-weight: 600;
+  color: #667b82;
+}
+
+.notification-list .notification-date {
+  font-style: italic;
+}
+
+.notification-list .notification-notes {
+  line-height: 120%;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: #a9aeb2;
+}

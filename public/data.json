@@ -1,0 +1,20 @@
+[
+  {
+    "jobName": "DailyEmailNotification",
+    "groupName": "Notification",
+    "notificationCrons": "0 0 12 * * ?",
+    "nextFireDatetime": "2018-11-28 13:30"
+  },
+  {
+    "jobName": "DailyRocketChatNotification",
+    "groupName": "Notification",
+    "notificationCrons": "0 15 10 ? * *;0 15 10 * * ?",
+    "nextFireDatetime": "2018-11-28 10:15"
+  },
+  {
+    "jobName": "RealTimeNotification",
+    "groupName": "Notification",
+    "notificationCrons": "0 15 10 * * ?;0 0/5 14 * * ?;0 0/5 14,18 * * ?",
+    "nextFireDatetime": "2018-11-28 14:45"
+  }
+]
